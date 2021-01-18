@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#C1112B"
+    android:background="@color/white"
     android:orientation="vertical"
     tools:context=".GirisYapActivity">
 
@@ -15,7 +15,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="center"
         android:layout_margin="5dp"
-        app:cardBackgroundColor="@color/black"
+        app:cardBackgroundColor="#DC3324"
         app:cardCornerRadius="8dp">
 
         <LinearLayout
@@ -44,7 +44,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="15dp"
-                    android:hint="Kullanici Email Adresi" />
+                    android:hint="Kullanıcı Email Adresi" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -68,22 +68,22 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <ImageButton
+                <Button
                     android:id="@+id/girisYapButton"
                     android:layout_width="100dp"
                     android:layout_height="55dp"
                     android:layout_gravity="left"
                     android:onClick="GirisYap"
-                    app:srcCompat="@drawable/giris" />
+                    android:text="Giriş Yap" />
 
-                <ImageButton
+                <Button
                     android:id="@+id/kayitOlButton"
                     android:layout_width="100dp"
                     android:layout_height="55dp"
                     android:layout_gravity="right"
                     android:layout_marginTop="-55dp"
                     android:onClick="KayitOl"
-                    app:srcCompat="@drawable/black" />
+                    android:text="Kayıt Ol"></Button>
             </LinearLayout>
 
         </LinearLayout>

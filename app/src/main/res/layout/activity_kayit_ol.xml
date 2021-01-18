@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#C1112B"
     android:orientation="vertical"
     tools:context=".KayitOlActivity">
 
@@ -14,7 +13,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="center"
         android:layout_margin="5dp"
-        app:cardBackgroundColor="@color/black"
+        app:cardBackgroundColor="#DC3324"
         app:cardCornerRadius="8dp">
 
         <LinearLayout
@@ -62,13 +61,13 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            <ImageButton
+            <Button
                 android:id="@+id/girisYapButton"
                 android:layout_width="100dp"
                 android:layout_height="55dp"
                 android:layout_gravity="center"
                 android:onClick="kayitOl"
-                app:srcCompat="@drawable/black" />
+                android:text="Kayıt Ol" />
 
 
         </LinearLayout>
