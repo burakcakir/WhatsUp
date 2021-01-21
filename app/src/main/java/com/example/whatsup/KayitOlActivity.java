@@ -16,6 +16,11 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class KayitOlActivity extends AppCompatActivity {
 
@@ -25,6 +30,8 @@ public class KayitOlActivity extends AppCompatActivity {
     Button kayitolButton;
 
     private FirebaseAuth firebaseAuth;
+    private FirebaseDatabase firebaseDatabase;
+    private DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +67,17 @@ public class KayitOlActivity extends AppCompatActivity {
             firebaseAuth.createUserWithEmailAndPassword(email, sifre).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                 @Override
                 public void onSuccess(AuthResult authResult) {
+
+                    firebaseDatabase = FirebaseDatabase.getInstance();
+                    databaseReference = firebaseDatabase.getReference().child("Kullanicilar").child(firebaseAuth.getUid());
+                    Map map = new HashMap();
+                    map.put("resim","null");
+                    map.put("isim","null");
+                    map.put("dogumTarihi","null");
+                    map.put("hakkimda","null");
+
+                    databaseReference.setValue(map);
+
                     Toast.makeText(KayitOlActivity.this, "Kayıt Başarılı!", Toast.LENGTH_LONG).show();
 
                     Intent intent = new Intent(KayitOlActivity.this, MainActivity.class);

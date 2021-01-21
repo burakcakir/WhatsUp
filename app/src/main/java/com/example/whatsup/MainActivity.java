@@ -54,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
+
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
@@ -64,6 +65,12 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MainActivity.this,GirisYapActivity.class);
             startActivity(intent);
             finish();
+        }
+        if ( item.getItemId() == R.id.profilDuzenle)
+        {
+            Intent intent = new Intent(MainActivity.this,KullaniciProfilFragment.class);
+            startActivity(intent);
+
         }
 
         return super.onOptionsItemSelected(item);
