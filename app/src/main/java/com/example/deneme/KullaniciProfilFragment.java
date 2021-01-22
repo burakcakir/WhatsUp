@@ -1,5 +1,4 @@
-package com.example.whatsup;
-
+package com.example.deneme;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;

@@ -1,4 +1,4 @@
-package com.example.whatsup;
+package com.example.deneme;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -43,6 +43,7 @@ public class KayitOlActivity extends AppCompatActivity {
     }
 
     public void tanimla() {
+
         imageView = findViewById(R.id.logo);
         kullaniciMail = findViewById(R.id.kullaniciEmail);
         kullaniciSifre = findViewById(R.id.kullaniciSifre);

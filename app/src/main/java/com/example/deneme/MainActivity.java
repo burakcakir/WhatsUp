@@ -1,4 +1,4 @@
-package com.example.whatsup;
+package com.example.deneme;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;

@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "3921859528",
-    "project_id": "whatsup-c2167",
-    "storage_bucket": "whatsup-c2167.appspot.com"
+    "project_number": "105958780434",
+    "project_id": "deneme-b77e1",
+    "storage_bucket": "deneme-b77e1.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:3921859528:android:900b44a7997b2a30b726fd",
+        "mobilesdk_app_id": "1:105958780434:android:a22764bcc40cc6b75172cb",
         "android_client_info": {
-          "package_name": "com.example.whatsup"
+          "package_name": "com.example.deneme"
         }
       },
       "oauth_client": [
         {
-          "client_id": "3921859528-rrd2osaqedq4fqluirrdjti428pvd96d.apps.googleusercontent.com",
+          "client_id": "105958780434-297bah35h9p28a5kjc0d3tenlj8ipqhe.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBjzeknf8B11dGc03IeZtZ358zPrVKy7hI"
+          "current_key": "AIzaSyAwHjvHNtYORS07Ec48h4Wt1dwcSc6j_mk"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "3921859528-rrd2osaqedq4fqluirrdjti428pvd96d.apps.googleusercontent.com",
+              "client_id": "105958780434-297bah35h9p28a5kjc0d3tenlj8ipqhe.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

@@ -1,4 +1,5 @@
-package com.example.whatsup;
+package com.example.deneme;
+
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -65,7 +66,7 @@ public class GirisYapActivity extends AppCompatActivity {
         {
             Toast.makeText(this, "Email ve Şifre Boş Bırakılamaz!", Toast.LENGTH_SHORT).show();
         } else
-            {
+        {
             firebaseAuth.signInWithEmailAndPassword(email, sifre).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                 @Override
                 public void onSuccess(AuthResult authResult) {
