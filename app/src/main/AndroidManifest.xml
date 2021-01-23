@@ -13,7 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Deneme">
-        <activity android:name=".KayitOlActivity"></activity>
+        <activity android:name=".KullaniciProfilActivity"></activity>
+        <activity android:name=".KayitOlActivity" />
         <activity android:name=".GirisYapActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
