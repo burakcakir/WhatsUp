@@ -73,9 +73,9 @@ public class KayitOlActivity extends AppCompatActivity {
                     databaseReference = firebaseDatabase.getReference().child("Kullanicilar").child(firebaseAuth.getUid());
                     Map map = new HashMap();
                     map.put("resim","null");
-                    map.put("isim","null");
-                    map.put("dogumTarihi","null");
-                    map.put("hakkimda","null");
+                    map.put("isim","İsim");
+                    map.put("dogumTarihi","Doğum Tarihi");
+                    map.put("hakkimda","Hakkimda");
 
                     databaseReference.setValue(map);
 

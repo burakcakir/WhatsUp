@@ -70,7 +70,7 @@
 
                 <Button
                     android:id="@+id/girisYapButton"
-                    android:layout_width="100dp"
+                    android:layout_width="126dp"
                     android:layout_height="55dp"
                     android:layout_gravity="left"
                     android:onClick="GirisYap"
@@ -78,12 +78,12 @@
 
                 <Button
                     android:id="@+id/kayitOlButton"
-                    android:layout_width="100dp"
+                    android:layout_width="126dp"
                     android:layout_height="55dp"
                     android:layout_gravity="right"
                     android:layout_marginTop="-55dp"
                     android:onClick="KayitOl"
-                    android:text="Kayıt Ol"></Button>
+                    android:text="Hesabım Yok"></Button>
             </LinearLayout>
 
         </LinearLayout>

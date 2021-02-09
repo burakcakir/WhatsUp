@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
         }
         if ( item.getItemId() == R.id.profilDuzenle)
         {
-            Intent intent = new Intent(MainActivity.this,KullaniciProfilActivity.class);
+            Intent intent = new Intent(MainActivity.this,new KullaniciProfilActivity().getClass());
             startActivity(intent);
 
         }
