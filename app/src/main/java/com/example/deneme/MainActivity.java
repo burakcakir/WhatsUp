@@ -72,6 +72,13 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
 
         }
+        if ( item.getItemId() == R.id.kullanicilar)
+        {
+            Intent intent = new Intent(MainActivity.this,KullanicilarActivity.class);
+            startActivity(intent);
+
+        }
+
 
         return super.onOptionsItemSelected(item);
     }
