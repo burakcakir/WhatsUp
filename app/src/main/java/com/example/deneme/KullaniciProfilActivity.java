@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -30,10 +31,12 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class KullaniciProfilActivity extends AppCompatActivity {
@@ -48,6 +51,9 @@ public class KullaniciProfilActivity extends AppCompatActivity {
     Button bilgiGuncelle;
     StorageReference storageReference;
     FirebaseStorage firebaseStorage;
+    StorageTask storageTask;
+
+
 
 
     public void guncelle()
@@ -126,47 +132,60 @@ public class KullaniciProfilActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 5 && resultCode == Activity.RESULT_OK) {
             Uri filePath = data.getData();
-            StorageReference ref = storageReference.child("kullaniciresimleri").child(RandomName.getSaltString()+".jpg");
-
-            ref.putFile(filePath).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+            String randomname=RandomName.getSaltString();
+            StorageReference ref = storageReference.child("kullaniciresimleri").child(randomname +".jpg");
+            storageTask = ref.putFile(filePath);
+            storageTask.continueWithTask(new Continuation() {
                 @Override
-                public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
-                    if (task.isSuccessful()) {
-                        Toast.makeText(KullaniciProfilActivity.this, "Resim Güncellendi!", Toast.LENGTH_SHORT).show();
-                        String isim = kullaniciIsmi.getText().toString();
-                        String dogum = dogumTarihi.getText().toString();
-                        String hakkimdakismi = hakkimda.getText().toString();
-                        firebaseStorage.getReference().child("Kullanicilar").child(firebaseAuth.getUid());
-                        databaseReference = database.getReference().child("Kullanicilar").child(firebaseAuth.getUid());
-                        Map map = new HashMap();
-                        map.put("isim",isim);
-                        map.put("dogumTarihi",dogum);
-                        map.put("hakkimda",hakkimdakismi);
-                        map.put("resim",task.getResult().getStorage().getDownloadUrl().toString());
-                        databaseReference.setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                if (task.isSuccessful()) {
-                                    Intent intent = new Intent(KullaniciProfilActivity.this, new KullaniciProfilActivity().getClass());
-                                    startActivity(intent);
-                                    finish();
-                                    Toast.makeText(KullaniciProfilActivity.this, "Güncelleme Başarılı", Toast.LENGTH_SHORT).show();
-
-
-                                }else{
-                                    Toast.makeText(KullaniciProfilActivity.this, "Güncelleme Başarısız!", Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                        });
-                    } else {
-                        Toast.makeText(KullaniciProfilActivity.this, "Resim Güncellenemedi!", Toast.LENGTH_SHORT).show();
-
+                public Object then(@NonNull Task task) throws Exception {
+                    if (!task.isSuccessful()){
+                        throw  task.getException();
                     }
+
+                    return ref.getDownloadUrl();
+                }
+            }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                @Override
+                public void onComplete(@NonNull Task<Uri> task) {
+                if (task.isSuccessful()){
+                    Uri downloadUri = task.getResult();
+                    String mUri = downloadUri.toString();
+                    databaseReference = database.getReference().child("Kullanicilar").child(firebaseAuth.getUid());
+                    String isim = kullaniciIsmi.getText().toString();
+                    String dogum = dogumTarihi.getText().toString();
+                    String hakkimdakismi = hakkimda.getText().toString();
+                    firebaseStorage.getReference().child("Kullanicilar").child(firebaseAuth.getUid());
+                    databaseReference = database.getReference().child("Kullanicilar").child(firebaseAuth.getUid());
+                    Map map = new HashMap();
+                    map.put("isim",isim);
+                    map.put("dogumTarihi",dogum);
+                    map.put("hakkimda",hakkimdakismi);
+                    map.put("resim",mUri);
+
+                    databaseReference.setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                Intent intent = new Intent(KullaniciProfilActivity.this, new KullaniciProfilActivity().getClass());
+                                startActivity(intent);
+                                finish();
+                                Toast.makeText(KullaniciProfilActivity.this, "Güncelleme Başarılı", Toast.LENGTH_SHORT).show();
+
+
+                            }else{
+                                Toast.makeText(KullaniciProfilActivity.this, "Güncelleme Başarısız!", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+
+                }else
+                    Toast.makeText(KullaniciProfilActivity.this, "Resim Güncellenemedi!", Toast.LENGTH_SHORT).show();
                 }
             });
-
         }
     }
+
+
     public void bilgileriGetir()
     {
         databaseReference.addValueEventListener(new ValueEventListener() {
