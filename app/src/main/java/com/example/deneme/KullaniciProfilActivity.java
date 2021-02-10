@@ -193,6 +193,7 @@ public class KullaniciProfilActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot)
             {
                 Kullanicilar kl = snapshot.getValue(Kullanicilar.class);
+
                 kullaniciIsmi.setText(kl.getIsim());
                 dogumTarihi.setText(kl.getDogumTarihi());
                 hakkimda.setText(kl.getHakkimda());
