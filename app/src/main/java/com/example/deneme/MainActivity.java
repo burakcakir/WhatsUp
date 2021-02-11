@@ -76,6 +76,11 @@ public class MainActivity extends AppCompatActivity {
         {
             Intent intent = new Intent(MainActivity.this,KullanicilarActivity.class);
             startActivity(intent);
+        }
+        if ( item.getItemId() == R.id.bildirimler)
+        {
+            Intent intent = new Intent(MainActivity.this,BildirimActivity.class);
+            startActivity(intent);
 
         }
 

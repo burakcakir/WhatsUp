@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -26,7 +27,7 @@ public class OtherProfileActivity extends AppCompatActivity {
     String otherID,userID;
     String kontrol="";
     Intent intent;
-    TextView kullaniciIsmiText,dogumTarihiText,hakkimdaText,takipciSayisi,arkadasSayisi,userProfilText;
+    TextView kullaniciIsmiText,dogumTarihiText,hakkimdaText,userProfilText,eklemeText;
     ImageView arkadasEkleImg,mesajGonderImg,takipEtImg,kullaniciImg;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference,databaseReferenceArkadaslik;
@@ -59,21 +60,25 @@ public class OtherProfileActivity extends AppCompatActivity {
         kullaniciIsmiText = (TextView)findViewById(R.id.kullaniciIsmiText);
         dogumTarihiText = (TextView)findViewById(R.id.dogumTarihiText);
         hakkimdaText = (TextView)findViewById(R.id.hakkimdaText);
-        takipciSayisi = (TextView)findViewById(R.id.takipciSayisi);
-        arkadasSayisi = (TextView)findViewById(R.id.arkadasSayisi);
         userProfilText = (TextView)findViewById(R.id.userProfilText);
+        eklemeText = (TextView)findViewById(R.id.eklemeText);
         arkadasEkleImg = (ImageView)findViewById(R.id.arkadasEkleImg);
         mesajGonderImg = (ImageView)findViewById(R.id.mesajGonderImg);
-        takipEtImg = (ImageView)findViewById(R.id.takipEtImg);
         kullaniciImg = (ImageView)findViewById(R.id.kullaniciImg);
+
+
         databaseReferenceArkadaslik.child(otherID).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.hasChild(userID)){
-                    kontrol = snapshot.child(userID).child("tip").getValue().toString();
-                    arkadasEkleImg.setImageResource(R.drawable.cikar);
+                    kontrol = "istek";
+                    arkadasEkleImg.setImageResource(R.drawable.reddet);
+                    eklemeText.setText("İsteği İptal Et");
 
                 }else{
+
+                    arkadasEkleImg.setImageResource(R.drawable.ekle);
+                    eklemeText.setText("Arkadaş Ekle");
 
                 }
 
@@ -85,6 +90,23 @@ public class OtherProfileActivity extends AppCompatActivity {
             }
         });
 
+        databaseReference.child("Arkadaslar").child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.hasChild(otherID)){
+                    kontrol = "arkadas";
+                    arkadasEkleImg.setImageResource(R.drawable.cikar);
+                    eklemeText.setText("Arkadaşı Çıkar");
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
     }
 
 
@@ -93,15 +115,14 @@ public class OtherProfileActivity extends AppCompatActivity {
         databaseReference.child("Kullanicilar").child(otherID).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                System.out.println("girdi:"+ otherID);
 
                 Kullanicilar kl = snapshot.getValue(Kullanicilar.class);
                 userProfilText.setText(kl.getIsim());
                 kullaniciIsmiText.setText("İsim                  : "+ kl.getIsim());
                 dogumTarihiText.setText("Doğum Tarihi : "+ kl.getDogumTarihi());
                 hakkimdaText.setText("Hakkinda         : "+ kl.getHakkimda());
-                Picasso.get().load(kl.getResim()).resize(180,180).into(kullaniciImg);
 
+                Picasso.get().load(kl.getResim()).resize(180,180).into(kullaniciImg);
 
             }
 
@@ -115,14 +136,19 @@ public class OtherProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                if (!kontrol.equals("")){
+                if (kontrol.equals("istek")){
+                    arkadasIptalEt(otherID,userID);
 
-                }else{
+                }else if (kontrol.equals("arkadas")){
+                    arkadasTablosundanCikar(otherID,userID);
+                }
+                else{
                     arkadasEkle(otherID,userID);
                 }
 
             }
         });
+
 
     }
 
@@ -136,10 +162,13 @@ public class OtherProfileActivity extends AppCompatActivity {
                     databaseReferenceArkadaslik.child(otherId).child(userId).child("tip").setValue("alındı").addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
-
+                            eklemeText.setText("İsteği İptal Et");
                             if (task.isSuccessful()){
+                                kontrol="istek";
                                 Toast.makeText(OtherProfileActivity.this , "Arkadaşlık İsteği Başarıyla Gönderildi", Toast.LENGTH_SHORT).show();
-                                arkadasEkleImg.setImageResource(R.drawable.cikar);
+                                arkadasEkleImg.setImageResource(R.drawable.reddet);
+
+
                             }else{
                                 Toast.makeText(OtherProfileActivity.this , "Bir problem meydana geldi!", Toast.LENGTH_SHORT).show();
                             }
@@ -156,6 +185,39 @@ public class OtherProfileActivity extends AppCompatActivity {
     }
 
     public void arkadasIptalEt(String otherId, String userId){
+        databaseReferenceArkadaslik.child(otherId).child(userId).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                databaseReferenceArkadaslik.child(userId).child(otherId).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        kontrol = "";
+                        arkadasEkleImg.setImageResource(R.drawable.ekle);
+                        eklemeText.setText("Arkadaş Ekle");
+                        Toast.makeText(OtherProfileActivity.this , "Arkadaşlık isteği iptal edildi!", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+            }
+        });
+
+    }
+    private void arkadasTablosundanCikar(final String otherId,final String userId) {
+     databaseReference.child("Arkadaslar").child(otherId).child(userId).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                databaseReference.child("Arkadaslar").child(userId).child(otherId).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        kontrol = "";
+                        arkadasEkleImg.setImageResource(R.drawable.ekle);
+                        eklemeText.setText("Arkadaş Ekle");
+                        Toast.makeText(OtherProfileActivity.this , "Arkadaşlıktan Çıkarıldı!", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+            }
+        });
 
     }
 

@@ -5,6 +5,10 @@
         android:title="Profil"
         ></item>
     <item
+        android:id="@+id/bildirimler"
+        android:title="Bildirimler"
+        ></item>
+    <item
         android:id="@+id/kullanicilar"
         android:title="Kullanıcılar"
         ></item>
