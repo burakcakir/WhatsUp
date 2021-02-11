@@ -13,7 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Deneme">
-        <activity android:name=".BildirimActivity"></activity>
+        <activity android:name=".FriendListActivity"></activity>
+        <activity android:name=".BildirimActivity" />
         <activity android:name=".OtherProfileActivity" />
         <activity android:name=".KullanicilarActivity" />
         <activity android:name=".KullaniciProfilActivity" />

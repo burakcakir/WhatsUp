@@ -83,6 +83,12 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
 
         }
+        if ( item.getItemId() == R.id.arkadaslistesi)
+        {
+            Intent intent = new Intent(MainActivity.this,FriendListActivity.class);
+            startActivity(intent);
+
+        }
 
 
         return super.onOptionsItemSelected(item);
