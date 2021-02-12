@@ -57,7 +57,7 @@
                 android:id="@+id/temelBilgiler"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="25dp"
                 android:text="Genel Bilgiler"
                 android:textColor="#DC3324"
                 android:layout_marginLeft="15dp"
@@ -98,7 +98,7 @@
                 android:layout_width="match_parent"
                 android:orientation="horizontal"
                 android:gravity="center"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="30dp"
                 android:layout_height="wrap_content">
                 <ImageView
                     android:layout_width="50dp"

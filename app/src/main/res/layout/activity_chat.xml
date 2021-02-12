@@ -63,6 +63,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#F8CCC8"
+        android:id="@+id/chatRecyView"
         android:layout_above="@+id/card_view_chat_bottom"
         android:layout_below="@+id/card_view_chat_top">
     </androidx.recyclerview.widget.RecyclerView>
@@ -92,6 +93,7 @@
                     android:layout_height="match_parent"
                     android:background="@null"
                     android:hint="Mesaj Gir"
+                    android:id="@+id/messageTextEditText"
                     android:inputType="text"
                     android:minHeight="50dp"
                     android:paddingLeft="10dp"></EditText>
@@ -100,6 +102,7 @@
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:id="@+id/sendMessage"
                 android:layout_weight="1"
                 android:src="@drawable/send"></com.google.android.material.floatingactionbutton.FloatingActionButton>
         </LinearLayout>
