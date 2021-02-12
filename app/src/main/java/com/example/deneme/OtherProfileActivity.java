@@ -28,7 +28,7 @@ public class OtherProfileActivity extends AppCompatActivity {
     String kontrol="";
     Intent intent;
     TextView kullaniciIsmiText,dogumTarihiText,hakkimdaText,userProfilText,eklemeText;
-    ImageView arkadasEkleImg,mesajGonderImg,takipEtImg,kullaniciImg;
+    ImageView arkadasEkleImg,kullaniciImg;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference,databaseReferenceArkadaslik;
     FirebaseAuth firebaseAuth;
@@ -63,7 +63,6 @@ public class OtherProfileActivity extends AppCompatActivity {
         userProfilText = (TextView)findViewById(R.id.userProfilText);
         eklemeText = (TextView)findViewById(R.id.eklemeText);
         arkadasEkleImg = (ImageView)findViewById(R.id.arkadasEkleImg);
-        mesajGonderImg = (ImageView)findViewById(R.id.mesajGonderImg);
         kullaniciImg = (ImageView)findViewById(R.id.kullaniciImg);
 
 
@@ -75,12 +74,12 @@ public class OtherProfileActivity extends AppCompatActivity {
                     arkadasEkleImg.setImageResource(R.drawable.reddet);
                     eklemeText.setText("İsteği İptal Et");
 
-                }else{
-
+                }else if(kontrol.equals("")){
                     arkadasEkleImg.setImageResource(R.drawable.ekle);
                     eklemeText.setText("Arkadaş Ekle");
 
                 }
+                else {}
 
             }
 
@@ -193,7 +192,7 @@ public class OtherProfileActivity extends AppCompatActivity {
                     public void onSuccess(Void aVoid) {
                         kontrol = "";
                         arkadasEkleImg.setImageResource(R.drawable.ekle);
-                        eklemeText.setText("Arkadaş Ekle");
+                       eklemeText.setText("Arkadaş Ekle");
                         Toast.makeText(OtherProfileActivity.this , "Arkadaşlık isteği iptal edildi!", Toast.LENGTH_SHORT).show();
                     }
                 });

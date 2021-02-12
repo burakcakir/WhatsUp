@@ -67,7 +67,6 @@ public class KullanicilarActivity extends AppCompatActivity {
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         Kullanicilar kl = snapshot.getValue(Kullanicilar.class);
                         if (!kl.getIsim().equals("İsim") && !snapshot.getKey().equals(user.getUid()) ){
-
                             userKeyList.add(snapshot.getKey());
                             userAdapter.notifyDataSetChanged();
                         }

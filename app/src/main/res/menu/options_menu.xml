@@ -6,12 +6,9 @@
         ></item>
     <item
         android:id="@+id/bildirimler"
-        android:title="Bildirimler"
+        android:title="İstekler"
         ></item>
-    <item
-        android:id="@+id/arkadaslistesi"
-        android:title="Arkadaş Listesi"
-        ></item>
+
     <item
         android:id="@+id/kullanicilar"
         android:title="Kullanıcılar"

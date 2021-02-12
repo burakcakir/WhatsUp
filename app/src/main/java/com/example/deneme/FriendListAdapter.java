@@ -3,15 +3,18 @@ package com.example.deneme;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -44,6 +47,8 @@ public class FriendListAdapter extends RecyclerView.Adapter<FriendListAdapter.Vi
     String userID;
 
 
+
+
     public FriendListAdapter(List<String> userKeyList, Activity activity, Context context) {
         this.userKeyList = userKeyList;
         this.activity = activity;
@@ -62,6 +67,7 @@ public class FriendListAdapter extends RecyclerView.Adapter<FriendListAdapter.Vi
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         View view = layoutInflater.inflate(R.layout.friends_layout, parent, false);
 
+
         return new ViewHolder(view);
     }
 
@@ -77,9 +83,6 @@ public class FriendListAdapter extends RecyclerView.Adapter<FriendListAdapter.Vi
                 Picasso.get().load(kl.getResim()).resize(180, 180).into(holder.userimg);
                 holder.friend_list_text.setText(kl.getIsim());
 
-
-
-
             }
 
             @Override
@@ -87,6 +90,17 @@ public class FriendListAdapter extends RecyclerView.Adapter<FriendListAdapter.Vi
 
             }
         });
+
+        holder.friendslayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, ChatActivity.class);
+                intent.putExtra("bilgiler",userKeyList.get(position));
+                context.startActivity(intent);
+
+            }
+        });
+
 
     }
 
@@ -102,12 +116,15 @@ public class FriendListAdapter extends RecyclerView.Adapter<FriendListAdapter.Vi
 
         TextView friend_list_text;
         ImageView userimg;
+        LinearLayout friendslayout;
+
 
 
         ViewHolder(View itemView) {
             super(itemView);
             friend_list_text = (TextView) itemView.findViewById(R.id.friend_list_text);
             userimg = (ImageView) itemView.findViewById(R.id.userimg);
+            friendslayout = (LinearLayout) itemView.findViewById(R.id.friendslayout);
 
 
         }
