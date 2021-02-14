@@ -82,7 +82,6 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
         });
 
     }
-//adapter listesi sizeı
 
     @Override
     public int getItemCount() {

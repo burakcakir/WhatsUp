@@ -30,7 +30,7 @@
                 android:layout_height="200dp"
                 android:layout_gravity="center"
                 android:layout_marginBottom="20dp"
-                app:srcCompat="@drawable/logo" />
+                app:srcCompat="@drawable/logo2" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/input_layout_email"
